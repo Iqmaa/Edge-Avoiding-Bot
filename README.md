@@ -28,5 +28,4 @@ ros2 launch bot_bringup simulated_robot.launch.py
 ros2 run bot_script edge_detection
 ```
 
-[Botvid.webm](https://github.com/user-attachments/assets/ff373cac-db30-4ac0-ae30-e43cb04a1c11)
-
+[Botvid.webm](https://github.com/user-attachments/assets/1a9056d9-79f0-419c-a1cd-c473eed8ed22)
