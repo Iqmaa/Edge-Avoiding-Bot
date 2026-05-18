@@ -1,0 +1,174 @@
+<?xml version="1.0" ?>
+<robot name="bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!-- base footprint is below the base link and is a projection of the base link unto the ground frame 
+it is used to determine the robot's position relative to the ground and nearby obstacles-->
+    <link name="base_footprint"/>
+
+<!-- creating the robot chasis -->
+<!-- base link is the center point of the robot's base -->
+    <link name="base_link">
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="5.0"/>
+        <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+
+    <!--contains the size(geometry) of the robot  -->
+    <visual>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+            <box size="0.7 0.5 0.2"/>
+        </geometry>
+        <material name="red">
+        <!-- rgba represents red, green, blue, and trasnparency -->
+            <color rgba="1.0 0.0 0.0 1.0"/>
+        </material>
+    </visual>
+
+    <!-- collision tells the physics engine the properties of the bot parts(stiffness,...) -->
+    <collision>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <geometry>
+            <box size="0.7 0.5 0.2"/>
+        </geometry>
+    </collision>
+    </link>
+
+    <joint name="base_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.15" rpy="0.0 0.0 0.0"/>
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+    </joint> 
+
+<!-- Right Wheel -->
+
+<link name="right_wheel_link">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="1.0"/>
+    <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <cylinder radius="0.15" length="0.05"/>
+    </geometry>
+    <material name="blue">
+      <color rgba="0.0 0.0 1.0 1.0"/>  
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <cylinder radius="0.15" length="0.05"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="right_wheel_joint" type="continuous">
+  <origin xyz="0.0 -0.275 0.0" rpy="1.57 0.0 0.0"/>
+  <parent link="base_link"/>
+  <child link="right_wheel_link"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+<!-- Left Wheel -->
+<link name="left_wheel_link">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="1.0"/>
+    <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <cylinder radius="0.15" length="0.05"/>
+    </geometry>
+    <material name="blue">
+      <color rgba="0.0 0.0 1.0 1.0"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <cylinder radius="0.15" length="0.05"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="left_wheel_joint" type="continuous">
+  <origin xyz="0.0 0.275 0.0" rpy="1.57 0.0 0.0"/>
+  <parent link="base_link"/>
+  <child link="left_wheel_link"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+</joint>
+
+<!-- Front Castor -->
+<link name="front_castor_link">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="0.5"/>
+    <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <sphere radius="0.045"/>
+    </geometry>
+    <material name="black">
+      <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <sphere radius="0.045"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="front_castor_joint" type="fixed">
+  <origin xyz="0.25 0.0 -0.1" rpy="0.0 0.0 0.0"/>
+  <parent link="base_link"/>
+  <child link="front_castor_link"/>
+</joint>
+
+<!-- Rear Castor -->
+<link name="back_castor_link">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <mass value="0.5"/>
+    <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <sphere radius="0.045"/>
+    </geometry>
+    <material name="black">
+      <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+  </visual>
+  <collision>
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <geometry>
+      <sphere radius="0.045"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="back_castor_joint" type="fixed">
+  <origin xyz="-0.25 0.0 -0.1" rpy="0.0 0.0 0.0"/>
+  <parent link="base_link"/>
+  <child link="back_castor_link"/>
+</joint>
+
+<!-- use sphere instead of cylinder in collision for wheels because it
+has jut 1 point of contact and therefore less friction-->
+
+<!-- a xacro file provides modularity over a .urdf file, it allows us to break the bot into segments 
+it also allows us to create a function in urdf -->
+</robot>
+
+ 

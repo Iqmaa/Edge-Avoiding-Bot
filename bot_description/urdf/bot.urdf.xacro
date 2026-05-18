@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<robot name="bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<!-- importing the bot_base xacro file -->
+    <xacro:include filename="$(find bot_description)/urdf/bot_base.xacro" />
+    <xacro:include filename="$(find bot_description)/urdf/bot_sensors.xacro" />
+    <xacro:include filename="$(find bot_description)/urdf/gazebo.xacro"/>
+    <xacro:include filename="$(find bot_description)/urdf/ros2_control.xacro"/>
+</robot>
+<!-- this is the main xacro file that'll the published to the robot's state publisher
+to help ros know the robot's params(joint, links and so on) -->
